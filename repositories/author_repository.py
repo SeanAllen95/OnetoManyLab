@@ -30,10 +30,18 @@ def select(id):
     values = [id]
     results = run_sql(sql, values)
 
-    # checking if the list returned by `run_sql(sql, values)` is empty. Empty lists are 'fasly' 
-    # Could alternativly have..
-    # if len(results) > 0 
     if results:
         result = results[0]
         author = Author(result['author_name'], result['id'] )
     return author
+
+def delete_all():
+    sql = "DELETE  FROM authors"
+    run_sql(sql)
+
+
+def delete(id):
+    sql = "DELETE  FROM authors WHERE id = %s"
+    values = [id]
+    run_sql(sql, values)
+
